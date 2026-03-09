@@ -11,20 +11,33 @@
 body{
 font-family:Arial;
 padding:40px;
+background:#F5F5F0;
+}
+
+h2{
+color:#0f0f0f;
 }
 
 input{
 display:block;
 margin:10px 0;
-padding:8px;
+padding:10px;
 width:300px;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
-padding:10px;
+padding:10px 15px;
 background:#C9A227;
 border:none;
 color:white;
+cursor:pointer;
+border-radius:5px;
+}
+
+button:hover{
+background:#b8911f;
 }
 
 </style>
@@ -39,7 +52,7 @@ color:white;
 <input id="image" placeholder="Image URL">
 <input id="affiliate" placeholder="Affiliate link">
 
-<button onclick="addProduct()">Add</button>
+<button onclick="addProduct()">Add Product</button>
 
 <h2>Add Price</h2>
 
@@ -53,30 +66,50 @@ color:white;
 
 const supabase = window.supabase.createClient(
 "https://xbaxcymfcqjmhqargjrh.supabase.co",
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiYXhjeW1mY3FqbWhxYXJnanJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMTc4MDEsImV4cCI6MjA4NzY5MzgwMX0.-4TMZcXwLIuiDqRPma6eVvenF6g5KV89jHrWOmnjX54"
 );
 
 async function addProduct(){
 
-await supabase.from("products").insert({
-name:document.getElementById("name").value,
-image_url:document.getElementById("image").value,
-affiliate_url:document.getElementById("affiliate").value
-});
+const name=document.getElementById("name").value;
+const image=document.getElementById("image").value;
+const affiliate=document.getElementById("affiliate").value;
 
+const {error}=await supabase.from("products").insert([
+{
+name:name,
+image_url:image,
+affiliate_url:affiliate
+}
+]);
+
+if(error){
+alert(error.message);
+}else{
 alert("Product added");
+}
 
 }
 
 async function addPrice(){
 
-await supabase.from("product_prices").insert({
-product_id:document.getElementById("product_id").value,
-price:document.getElementById("price").value,
-store:document.getElementById("store").value
-});
+const product_id=document.getElementById("product_id").value;
+const price=document.getElementById("price").value;
+const store=document.getElementById("store").value;
 
+const {error}=await supabase.from("product_prices").insert([
+{
+product_id:product_id,
+price:price,
+store:store
+}
+]);
+
+if(error){
+alert(error.message);
+}else{
 alert("Price added");
+}
 
 }
 
