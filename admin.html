@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dealory Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+body{
+font-family:Arial;
+padding:40px;
+}
+
+input{
+display:block;
+margin:10px 0;
+padding:8px;
+width:300px;
+}
+
+button{
+padding:10px;
+background:#C9A227;
+border:none;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Add Product</h2>
+
+<input id="name" placeholder="Product name">
+<input id="image" placeholder="Image URL">
+<input id="affiliate" placeholder="Affiliate link">
+
+<button onclick="addProduct()">Add</button>
+
+<h2>Add Price</h2>
+
+<input id="product_id" placeholder="Product ID">
+<input id="price" placeholder="Price">
+<input id="store" placeholder="Store name">
+
+<button onclick="addPrice()">Add Price</button>
+
+<script>
+
+const supabase = window.supabase.createClient(
+"https://xbaxcymfcqjmhqargjrh.supabase.co",
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+);
+
+async function addProduct(){
+
+await supabase.from("products").insert({
+name:document.getElementById("name").value,
+image_url:document.getElementById("image").value,
+affiliate_url:document.getElementById("affiliate").value
+});
+
+alert("Product added");
+
+}
+
+async function addPrice(){
+
+await supabase.from("product_prices").insert({
+product_id:document.getElementById("product_id").value,
+price:document.getElementById("price").value,
+store:document.getElementById("store").value
+});
+
+alert("Price added");
+
+}
+
+</script>
+
+</body>
+</html>
