@@ -1,6 +1,6 @@
 const supabase = window.supabase.createClient(
 "https://xbaxcymfcqjmhqargjrh.supabase.co",
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhiYXhjeW1mY3FqbWhxYXJnanJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMTc4MDEsImV4cCI6MjA4NzY5MzgwMX0.-4TMZcXwLIuiDqRPma6eVvenF6g5KV89jHrWOmnjX54"
 );
 
 async function loadProducts(){
